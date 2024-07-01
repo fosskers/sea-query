@@ -134,48 +134,48 @@ impl sqlx::IntoArguments<'_, sqlx::postgres::Postgres> for SqlxValues {
                     ArrayType::Bool => {
                         let value: Option<Vec<bool>> = Value::Array(ty, v)
                             .expect("This Value::Array should consist of Value::Bool");
-                        args.add(value)
+                        args.add(value).expect("ArrayType::Bool")
                     }
                     ArrayType::TinyInt => {
                         let value: Option<Vec<i8>> = Value::Array(ty, v)
                             .expect("This Value::Array should consist of Value::TinyInt");
-                        args.add(value)
+                        args.add(value).expect("ArrayType::TinyInt")
                     }
                     ArrayType::SmallInt => {
                         let value: Option<Vec<i16>> = Value::Array(ty, v)
                             .expect("This Value::Array should consist of Value::SmallInt");
-                        args.add(value)
+                        args.add(value).expect("ArrayType::SmallInt")
                     }
                     ArrayType::Int => {
                         let value: Option<Vec<i32>> = Value::Array(ty, v)
                             .expect("This Value::Array should consist of Value::Int");
-                        args.add(value)
+                        args.add(value).expect("ArrayType::Int")
                     }
                     ArrayType::BigInt => {
                         let value: Option<Vec<i64>> = Value::Array(ty, v)
                             .expect("This Value::Array should consist of Value::BigInt");
-                        args.add(value)
+                        args.add(value).expect("ArrayType::BigInt")
                     }
                     ArrayType::TinyUnsigned => {
                         let value: Option<Vec<u8>> = Value::Array(ty, v)
                             .expect("This Value::Array should consist of Value::TinyUnsigned");
                         let value: Option<Vec<i16>> =
                             value.map(|vec| vec.into_iter().map(|i| i as i16).collect());
-                        args.add(value)
+                        args.add(value).expect("ArrayType::TinyUnsigned")
                     }
                     ArrayType::SmallUnsigned => {
                         let value: Option<Vec<u16>> = Value::Array(ty, v)
                             .expect("This Value::Array should consist of Value::SmallUnsigned");
                         let value: Option<Vec<i32>> =
                             value.map(|vec| vec.into_iter().map(|i| i as i32).collect());
-                        args.add(value)
+                        args.add(value).expect("ArrayType::SmallUnsigned")
                     }
                     ArrayType::Unsigned => {
                         let value: Option<Vec<u32>> = Value::Array(ty, v)
                             .expect("This Value::Array should consist of Value::Unsigned");
                         let value: Option<Vec<i64>> =
                             value.map(|vec| vec.into_iter().map(|i| i as i64).collect());
-                        args.add(value)
+                        args.add(value).expect("ArrayType::Unsigned")
                     }
                     ArrayType::BigUnsigned => {
                         let value: Option<Vec<u64>> = Value::Array(ty, v)
@@ -185,34 +185,34 @@ impl sqlx::IntoArguments<'_, sqlx::postgres::Postgres> for SqlxValues {
                                 .map(|i| <i64 as TryFrom<u64>>::try_from(i).unwrap())
                                 .collect()
                         });
-                        args.add(value)
+                        args.add(value).expect("ArrayType::BigUnsigned")
                     }
                     ArrayType::Float => {
                         let value: Option<Vec<f32>> = Value::Array(ty, v)
                             .expect("This Value::Array should consist of Value::Float");
-                        args.add(value)
+                        args.add(value).expect("ArrayType::Float")
                     }
                     ArrayType::Double => {
                         let value: Option<Vec<f64>> = Value::Array(ty, v)
                             .expect("This Value::Array should consist of Value::Double");
-                        args.add(value)
+                        args.add(value).expect("ArrayType::Double")
                     }
                     ArrayType::String => {
                         let value: Option<Vec<String>> = Value::Array(ty, v)
                             .expect("This Value::Array should consist of Value::String");
-                        args.add(value)
+                        args.add(value).expect("ArrayType::String")
                     }
                     ArrayType::Char => {
                         let value: Option<Vec<char>> = Value::Array(ty, v)
                             .expect("This Value::Array should consist of Value::Char");
                         let value: Option<Vec<String>> =
                             value.map(|vec| vec.into_iter().map(|c| c.to_string()).collect());
-                        args.add(value)
+                        args.add(value).expect("ArrayType::Char")
                     }
                     ArrayType::Bytes => {
                         let value: Option<Vec<Vec<u8>>> = Value::Array(ty, v)
                             .expect("This Value::Array should consist of Value::Bytes");
-                        args.add(value)
+                        args.add(value).expect("ArrayType::Bytes")
                     }
                     #[cfg(feature = "with-chrono")]
                     ArrayType::ChronoDate => {
